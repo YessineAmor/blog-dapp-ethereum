@@ -50,4 +50,4 @@ contract Blog {
         postCreationCost = _newValue;
     }
     
-}
+}                                                                                                         
