@@ -1,4 +1,4 @@
-pragma solidity ^0.5.1;
+pragma solidity ^0.5.11;
 pragma experimental ABIEncoderV2;
 // Users can publish articles
 // Users can comment on articles
@@ -6,6 +6,7 @@ pragma experimental ABIEncoderV2;
 // Users can pay for their article to be featured
 // Each post creation costs 0.001 ether
 contract Blog {
+
   struct Submission{
     address payable writer;
     string title;
@@ -17,14 +18,14 @@ contract Blog {
 
   Submission[] public submissions;
 
-    address owner = msg.sender;
+  address owner = msg.sender;
 
-    uint public postCreationCost = 0.001 ether;
+  uint public postCreationCost = 0.001 ether;
 
-    modifier ownerOnly{
-        require(msg.sender == owner,"Only owner can call this function");
-        _;
-    }
+  modifier ownerOnly{
+      require(msg.sender == owner,"Only owner can call this function");
+      _;
+  }
     
   function publishSubmission(string memory _content,string memory _title, uint _parentID) public payable returns(uint) {
     require(msg.value>=postCreationCost,"Post creation cost is 0.001 ether");
@@ -36,18 +37,34 @@ contract Blog {
   }
   
   function rewardSubmission(uint _submissionID) public payable {
-      require(_submissionID<submissions.length,"Submission doesn't exist");
-      submissions[_submissionID].writer.transfer(msg.value);
-      submissions[_submissionID].reward += msg.value;
+    require(_submissionID>0 && _submissionID<=submissions.length,"Submission doesn't exist");
+    submissions[_submissionID-1].writer.transfer(msg.value);
+    submissions[_submissionID-1].reward += msg.value;
   }
-  
-  function withdraw(uint _amount) public ownerOnly{
-     require(_amount*(1 ether)<=address(this).balance*(1 ether));
-      msg.sender.transfer(_amount *(1 ether));
-    }
+
+  function withdraw(uint _amount) public ownerOnly {
+    require(_amount*(1 ether)<=address(this).balance*(1 ether),"Contract balance is lower that requested amount");
+    msg.sender.transfer(_amount*(1 ether));
+  }
+
+  function getContractBalance() public view ownerOnly returns (uint256) {
+    return address(this).balance;
+  }
     
-    function changePostCreationCost(uint _newValue) public ownerOnly{
+  function changePostCreationCost(uint _newValue) public ownerOnly {
         postCreationCost = _newValue;
-    }
-    
+  }
+
+  function getAllSubmissions() public view returns(Submission[] memory){
+    return submissions;
+  }
+
+  function getSubmissionsLength() public view returns (uint){
+    return submissions.length;
+  }
+
+  function getSubmission(uint _submissionID) public view returns(Submission memory){
+    require(_submissionID>0 && _submissionID<=submissions.length,"Submission doesn't exist");
+    return submissions[_submissionID-1];
+  }
 }                                                                                                         
