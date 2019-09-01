@@ -8,5 +8,15 @@ module.exports = {
     develop: {
       port: 8545
     }
+  },
+  compilers: {
+    solc: {
+      version: "0.5.11", // A version or constraint - Ex. "^0.5.0"
+                         // Can also be set to "native" to use a native solc
+      docker: false, // Use a version obtained through docker
+      settings: {
+        evmVersion: "byzantium" // Default: "byzantium"
+      }
+    }
   }
 };
