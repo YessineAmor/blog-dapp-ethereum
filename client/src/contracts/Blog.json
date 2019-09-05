@@ -6604,10 +6604,16 @@
       "links": {},
       "address": "0xD217100608F525DcfBA2e29267167F1e8C029E4F",
       "transactionHash": "0xee8c4cd5235d233c6194576ec192c817e7296bf485cefbad0660a6a871f8896b"
+    },
+    "1567384424592": {
+      "events": {},
+      "links": {},
+      "address": "0xCbc1B62401f762459c8F9dc58c4d44AD81047a8c",
+      "transactionHash": "0xa25a84c59eba1c5cc971be02613ae1b82c8b38ef13b2e31682fc8fa95b02225a"
     }
   },
   "schemaVersion": "3.0.14",
-  "updatedAt": "2019-09-01T23:21:08.037Z",
+  "updatedAt": "2019-09-02T00:42:17.921Z",
   "devdoc": {
     "methods": {}
   },

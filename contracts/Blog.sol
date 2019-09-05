@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 // Users can comment on articles
 // Users can like/dislike articles/comments
 // Users can pay for their article to be featured
-// Each post creation costs 0.001 ether
+// Each post creation costs 0.05 ether
 contract Blog {
 
   struct Submission{
@@ -20,7 +20,7 @@ contract Blog {
 
   address owner = msg.sender;
 
-  uint public postCreationCost = 0.001 ether;
+  uint public postCreationCost = 0.05 ether;
 
   modifier ownerOnly{
       require(msg.sender == owner,"Only owner can call this function");
@@ -28,7 +28,7 @@ contract Blog {
   }
     
   function publishSubmission(string memory _content,string memory _title, uint _parentID) public payable returns(uint) {
-    require(msg.value>=postCreationCost,"Post creation cost is 0.001 ether");
+    require(msg.value>=postCreationCost,"Post creation cost is 0.05 ether");
     if(_parentID != 0) // 0 means no parent
     require(_parentID<submissions.length,"Parent ID doesn't point to a submission.");
     Submission memory newSubmission = Submission(msg.sender,_title,_content,now,_parentID,0);
@@ -43,8 +43,9 @@ contract Blog {
   }
 
   function withdraw(uint _amount) public ownerOnly {
+    require(_amount*(1 ether)>0,"Your either trying to overflow me or you want to withdraw 0 eth. Not cool.");
     require(_amount*(1 ether)<=address(this).balance*(1 ether),"Contract balance is lower that requested amount");
-    msg.sender.transfer(_amount*(1 ether));
+    msg.sender.transfer(_amount);
   }
 
   function getContractBalance() public view ownerOnly returns (uint256) {
