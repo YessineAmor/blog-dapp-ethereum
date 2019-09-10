@@ -83,7 +83,7 @@ class Submissions extends Component {
         });
         return (
             <div>
-                <h4>There is currently {this.state.submissionsCount} submissions on the blockchain</h4>
+                <h4>A total of {this.state.submissionsCount} submissions exists on the blockchain</h4>
                 {Submissions}
             </div>
         );
