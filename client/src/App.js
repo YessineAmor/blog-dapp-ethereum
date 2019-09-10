@@ -22,6 +22,7 @@ class App extends Component {
 
         return (
             <div className="App">
+                <h1>Greatest Blog Ever</h1>
                 <PublishForm vars={this.state} />
                 <Submissions vars={this.state} />
             </div>
