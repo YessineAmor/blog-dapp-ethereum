@@ -4,7 +4,6 @@ import "./App.css";
 import Submissions from "./components/Submissions.js";
 import PublishForm from "./components/PublishForm.js";
 import blogUtils from "./utils/blogUtils.js";
-import SubmissionsCount from "./components/SubmissionsCount.js";
 
 class App extends Component {
     state = { web3: null, accounts: null, contract: null };
@@ -23,7 +22,6 @@ class App extends Component {
 
         return (
             <div className="App">
-                <SubmissionsCount vars={this.state} />
                 <PublishForm vars={this.state} />
                 <Submissions vars={this.state} />
             </div>

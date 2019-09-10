@@ -13,6 +13,7 @@ class Submissions extends Component {
         try {
             // Set web3, accounts, and contract to the state, and then proceed with an
             // example of interacting with the contract's methods.
+
             const vals = await blogUtils.getVars()
             const web3 = vals[0]
             const accounts = vals[1]
