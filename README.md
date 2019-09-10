@@ -2,11 +2,7 @@
 A blog dApp on Ethereum blockchain using truffle, solidity and react
 
 ## User capabilites
-* Users can publish articles
-* Users can comment on articles
-* Users can like/dislike articles/comments
-* Users can donate to comment/article writer
-* Users can pay for their article to be featured
-
-## TO DO
-* Add front end
+* Users can publish articles - DONE
+* Users can comment on articles - TO DO
+* Users can like/dislike articles/comments - TO DO
+* Users can donate to comment/article writer - TO DO
