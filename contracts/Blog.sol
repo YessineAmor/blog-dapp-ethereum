@@ -26,16 +26,19 @@ contract Blog {
       require(msg.sender == owner,"Only owner can call this function");
       _;
   }
+
+  event SubmissionEvent(uint submissionID);
     
-  function publishSubmission(string memory _content,string memory _title, uint _parentID) public payable returns(uint) {
+  function publishSubmission(string memory _title,string memory _content, uint _parentID) public payable returns(uint) {
     require(msg.value>=postCreationCost,"Post creation cost is 0.05 ether");
     if(_parentID != 0) // 0 means no parent
     require(_parentID<submissions.length,"Parent ID doesn't point to a submission.");
     Submission memory newSubmission = Submission(msg.sender,_title,_content,now,_parentID,0);
     uint submissionID = submissions.push(newSubmission);
+    emit SubmissionEvent(submissionID);
     return submissionID;
   }
-  
+
   function rewardSubmission(uint _submissionID) public payable {
     require(_submissionID>0 && _submissionID<=submissions.length,"Submission doesn't exist");
     submissions[_submissionID-1].writer.transfer(msg.value);
