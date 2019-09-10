@@ -28,6 +28,7 @@ contract Blog {
   }
 
   event SubmissionEvent(uint submissionID);
+  event RewardSubmission(uint submissionID);
     
   function publishSubmission(string memory _title,string memory _content, uint _parentID) public payable returns(uint) {
     require(msg.value>=postCreationCost,"Post creation cost is 0.05 ether");
@@ -43,6 +44,7 @@ contract Blog {
     require(_submissionID>0 && _submissionID<=submissions.length,"Submission doesn't exist");
     submissions[_submissionID-1].writer.transfer(msg.value);
     submissions[_submissionID-1].reward += msg.value;
+    emit RewardSubmission(_submissionID);
   }
 
   function withdraw(uint _amount) public ownerOnly {

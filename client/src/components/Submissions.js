@@ -35,14 +35,7 @@ class Submissions extends Component {
             console.error(error);
         }
     };
-    fetchSubmission = async (id) => {
-        this.state.contract.methods.getSubmission(id).call().then(res => {
-            //console.log("fetch ", res)
-            //console.log(this.state.submissions.unshift(res))
-            //console.log(this.state.submissions)
-            this.setState({ submissions: this.state.submissions })
-        })
-    }
+
     fetchSubmissions = async () => {
         const { accounts, contract, web3 } = this.state;
         // await contract.methods.set(5).send({ from: accounts[0] });
@@ -81,10 +74,10 @@ class Submissions extends Component {
                     <pre>{date.toString()}</pre>
                     <pre>
                         Written by {value[0]}, Rewards:{" "}
-                        {value["reward"]} eth{" "}
+                        {this.state.web3.utils.fromWei(value["reward"], "ether")} eth{" "}
                     </pre>{" "}
                     <h4> {value[2]} </h4>{" "}
-                    <RewardForm />
+                    <RewardForm vars={this.state} submissionIndex={index} fetchSubmissions={this.fetchSubmissions} />
                 </div>
             );
         });

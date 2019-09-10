@@ -27,6 +27,10 @@ const blogUtils = class {
         await contract.methods.publishSubmission(title, content, parentID).send({ from: account, value: web3.utils.toWei("0.05", "ether") });
     }
 
+    static async rewardSubmission(submissionID, amount, web3, account, contract) {
+        await contract.methods.rewardSubmission(submissionID).send({ from: account, value: web3.utils.toWei(amount, "ether") })
+    }
+
     static async test() {
         return this.getVars()
     }
