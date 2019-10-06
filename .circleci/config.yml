@@ -13,6 +13,15 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
+          name: Installing client dependencies
+          command: cd client/ && yarn
+      - run:
+          name: Running react tests
+          command: cd client/ && yarn run test
+      - run:
+          name: Building client
+          command: cd client/ && yarn run build
+      - run:
           name: Installing dependencies
           command: npm install
       - save_cache:
@@ -25,14 +34,6 @@ jobs:
       #- run:
        # name: Running security tests
         #command: npm run test:security
-      - run:
-          name: Installing client dependencies
-          command: cd client/ && yarn
-      - run:
-          name: Running react tests
-          command: cd client/ && yarn run test
-      - run:
-          name: Building client
-          command: cd client/ && yarn run build
+
         
 
