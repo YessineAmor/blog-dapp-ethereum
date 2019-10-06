@@ -16,7 +16,7 @@ contract Blog {
     uint reward;
   }
 
-  Submission[] public submissions;
+  Submission[] submissions;
 
   address owner = msg.sender;
 
