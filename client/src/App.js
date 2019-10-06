@@ -7,7 +7,7 @@ import blogUtils from "./utils/blogUtils.js";
 
 class App extends Component {
     componentDidMount = async () => {
-        
+        document.title="Greatest Blog!";
     }
     render() {
         /*  if (!this.state.web3) {
