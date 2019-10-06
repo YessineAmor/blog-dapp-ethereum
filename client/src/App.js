@@ -6,14 +6,8 @@ import PublishForm from "./components/PublishForm.js";
 import blogUtils from "./utils/blogUtils.js";
 
 class App extends Component {
-    state = { web3: null, accounts: null, contract: null };
     componentDidMount = async () => {
-        const vals = await blogUtils.getVars()
-        const web3 = vals[0]
-        const accounts = vals[1]
-        const contract = vals[4]
-        this.setState({ web3: web3, accounts: accounts, contract: contract })
-
+        
     }
     render() {
         /*  if (!this.state.web3) {
@@ -23,8 +17,10 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>Greatest Blog Ever</h1>
-                <PublishForm vars={this.state} />
-                <Submissions/>
+                <h5>it's not the greatest looking blog but the more important question
+                    to ask does it have the best content? ... well no but it's something!</h5>
+                <PublishForm />
+                <Submissions />
             </div>
         );
     }

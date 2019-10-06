@@ -11,11 +11,10 @@ class Submissions extends Component {
         try {
             // Set web3, accounts, and contract to the state, and then proceed with an
             // example of interacting with the contract's methods.
-
-            const vals = await blogUtils.getVars()
-            const web3 = vals[0]
-            const accounts = vals[1]
-            const instance = vals[4]
+            await blogUtils.getVars()
+            const web3 = blogUtils.web3;
+            const accounts = blogUtils.accounts;
+            const instance = blogUtils.instance;
             this.setState(
                 { web3, accounts, contract: instance },
                 this.fetchSubmissions
@@ -35,11 +34,7 @@ class Submissions extends Component {
     };
 
     fetchSubmissions = async () => {
-        const { contract } = this.state;
-        // await contract.methods.set(5).send({ from: accounts[0] });
-        //await contract.methods.publishSubmission("content", "title", 0).send({ from: accounts[0], value: web3.utils.toWei("0.05", "ether") });
-        //await contract.methods.publishSubmission("second method", "Second", 0,{ from: accounts[0], value: web3.utils.toWei("0.05", "ether") })
-        // Get the value from the contract to prove it worked.
+        const contract = this.state.contract;
         let submissions = [];
         await contract.methods
             .getSubmissionsLength()
@@ -75,13 +70,13 @@ class Submissions extends Component {
                         {this.state.web3.utils.fromWei(value["reward"], "ether")} eth{" "}
                     </pre>{" "}
                     <h4> {value[2]} </h4>{" "}
-                    <RewardForm vars={this.state} submissionIndex={index} fetchSubmissions={this.fetchSubmissions} />
+                    <RewardForm submissionIndex={index} fetchSubmissions={this.fetchSubmissions} />
                 </div>
             );
         });
         return (
             <div>
-                <h4>A total of {this.state.submissionsCount} submissions exists on the blockchain</h4>
+                <h4>A total of {this.state.submissionsCount} submission(s) currently exist on the blockchain</h4>
                 {Submissions}
             </div>
         );

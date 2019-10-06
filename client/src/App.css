@@ -1,5 +1,14 @@
+body{
+    background-color: whitesmoke;
+
+}
 .App {
     text-align: center;
+}
+
+.publishing{
+    margin-bottom:0.5em;
+    width:45%;
 }
 
 .App-logo {
@@ -23,7 +32,8 @@
 }
 
 .submission {
-    background-color: silver;
+    color:aliceblue;
+    background-color: lightcoral;
     width: 50%;
     border-radius: 1em;
     padding: 1px;

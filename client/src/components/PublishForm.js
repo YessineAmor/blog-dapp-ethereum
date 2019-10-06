@@ -11,11 +11,7 @@ class PublishForm extends Component {
             event.preventDefault();
             const title = this.state.title
             const content = this.state.content
-            console.log("props", this.props.vars.web3)
-            const web3 = this.props.vars.web3
-            const accounts = this.props.vars.accounts
-            const contract = this.props.vars.contract
-            blogUtils.publishSubmission(title, content, 0, web3, accounts[0], contract)
+            blogUtils.publishSubmission(title, content, 0)
         } catch (error) {
             console.log(error)
         }
@@ -26,11 +22,12 @@ class PublishForm extends Component {
     render() {
         return (
             <form onSubmit={this.mySubmitHandler}>
-                <input placeholder="Title"
+                <input placeholder="Title (40 chars max)"
                     type='text' name="title"
-                    onChange={this.myChangeHandler}
-                />
-                <input placeholder="Content" name="content" type="text" onChange={this.myChangeHandler} />
+                    onChange={this.myChangeHandler} maxLength="40" className="publishing"
+                /><br></br>
+                <textarea className="publishing" placeholder="Talk about whatever you like! Try to keep it civil though (300 chars max)" maxLength="300" name="content" onChange={this.myChangeHandler}></textarea>
+                <br></br>
                 <input value="Publish"
                     type='submit'
                 />

@@ -2,7 +2,6 @@
   "name": "blog-dapp-ethereum",
   "version": "1.0.0",
   "description": "A blog dApp on Ethereum blockchain using truffle, solidity and react",
-  "main": "./client/build/index.html",
   "directories": {
     "test": "test"
   },
@@ -14,7 +13,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start":"cd client/ && yarn && yarn run build && yarn run start",
     "test": "truffle test"
   },
   "repository": {

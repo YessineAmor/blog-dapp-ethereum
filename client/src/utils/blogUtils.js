@@ -3,33 +3,59 @@ import BlogContract from "../contracts/Blog.json";
 
 const blogUtils = class {
 
+    constructor() {
+        this.web3=null;
+        this.accounts=null;
+        this.networkId=null;
+        this.instance=null;
+    }
+
+    get accounts(){
+        return this.accounts;
+    }
+    get instance(){
+        return this.instance;
+    }
+    get networkId(){
+        return this.instance;
+    }
+    get web3(){
+        return this.instance;
+    }
+
     static async getVars() {
         try {
-            // Get network provider and web3 instance.
-            const web3 = await getWeb3();
-            // Use web3 to get the user's accounts.
-            const accounts = await web3.eth.getAccounts();
+            // Get network provider and this.web3 this.instance.
+            this.web3 = await getWeb3();
+            // Use this.web3 to get the user's this.accounts.
+            this.accounts = await this.web3.eth.getAccounts();
 
-            // Get the contract instance.
-            const networkId = await web3.eth.net.getId();
-            const deployedNetwork = BlogContract.networks[networkId];
-            const instance = new web3.eth.Contract(
+            // Get the contract this.instance.
+             this.networkId = await this.web3.eth.net.getId();
+             this.instance = new this.web3.eth.Contract(
                 BlogContract.abi,
-                deployedNetwork && deployedNetwork.address
+                '0x55DAeE5db3BCB9b74ddf0fF483322519fcf376b9'
             );
-            return [web3, accounts, networkId, deployedNetwork, instance]
+            return [this.web3, this.accounts, this.networkId, this.instance]
         } catch (error) {
             console.log(error)
         }
     }
 
-    static async publishSubmission(title, content, parentID, web3, account, contract) {
-        await contract.methods.publishSubmission(title, content, parentID).send({ from: account, value: web3.utils.toWei("0.05", "ether") });
+    static async publishSubmission(title, content, parentID) {
+        await this.instance.methods.publishSubmission(title, content, parentID).send({ from: this.accounts[0], value: this.web3.utils.toWei("0.05", "ether") });
     }
 
-    static async rewardSubmission(submissionID, amount, web3, account, contract) {
-        await contract.methods.rewardSubmission(submissionID).send({ from: account, value: web3.utils.toWei(amount, "ether") })
+    static async rewardSubmission(submissionID, amount) {
+        console.log("You " + this.accounts[0] + " are rewarding " + amount + " eth ");
+        await this.instance.methods.rewardSubmission(submissionID).send({ from: this.accounts[0], value: this.web3.utils.toWei(amount, "ether") })
     }
+
+    static async getSubmission(submissionID, contract) {
+        return await this.instance.methods.getSubmission(submissionID).call();
+    }
+
+
 
     static async test() {
         return this.getVars()
