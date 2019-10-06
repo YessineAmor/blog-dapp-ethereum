@@ -25,4 +25,11 @@ jobs:
       #- run:
        # name: Running security tests
         #command: npm run test:security
+      - run:
+          name: Running react tests
+          command: cd client/ && yarn run test
+      - run:
+          name: Building client
+          command: yarn run build
+        
 
