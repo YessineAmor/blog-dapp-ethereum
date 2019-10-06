@@ -23,14 +23,14 @@ jobs:
           command: cd client/ && CI=false yarn run build
       - run:
           name: Installing dependencies
-          command: npm install
+          command: yarn
       - save_cache:
           paths:
             - client/node_modules
           key: v3-dependencies-{{ checksum "package.json" }}
       - run:
           name: Running truffle tests
-          command: npm run test
+          command: yarn run test
       #- run:
        # name: Running security tests
         #command: npm run test:security
