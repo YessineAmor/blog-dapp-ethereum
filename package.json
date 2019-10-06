@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start":"cd client/ && yarn run start",
+    "start":"cd client/ && yarn && yarn run build && yarn run start",
     "test": "truffle test"
   },
   "repository": {
