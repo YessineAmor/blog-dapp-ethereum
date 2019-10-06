@@ -18,7 +18,7 @@ class RewardForm extends Component {
         event.preventDefault();
         const submissionID = this.props.submissionIndex + 1
         await blogUtils.getSubmission(submissionID).then(async (sub) => {
-            if (sub.writer != blogUtils.accounts[0]) {
+            if (sub.writer == blogUtils.accounts[0]) {
                 alert("You can't reward yourself, silly!");
             } else {
                 await blogUtils.rewardSubmission(submissionID, this.state.rewardAmount)

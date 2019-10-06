@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import "./App.css";
 import Submissions from "./components/Submissions.js";
 import PublishForm from "./components/PublishForm.js";
-import blogUtils from "./utils/blogUtils.js";
 
 class App extends Component {
     componentDidMount = async () => {
