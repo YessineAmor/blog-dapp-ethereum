@@ -13,15 +13,15 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-        name: Running tests
-        command: npm install
+          name: Running tests
+          command: npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-        name: Running truffle tests
-        command: npm run test
+          name: Running truffle tests
+          command: npm run test
       #- run:
        # name: Running security tests
         #command: npm run test:security
