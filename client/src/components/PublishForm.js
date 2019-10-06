@@ -15,7 +15,7 @@ class PublishForm extends Component {
             const web3 = this.props.vars.web3
             const accounts = this.props.vars.accounts
             const contract = this.props.vars.contract
-            const res = blogUtils.publishSubmission(title, content, 0, web3, accounts[0], contract)
+            blogUtils.publishSubmission(title, content, 0, web3, accounts[0], contract)
         } catch (error) {
             console.log(error)
         }

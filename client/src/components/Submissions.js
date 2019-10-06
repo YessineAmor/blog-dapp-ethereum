@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import _ from "lodash";
 import RewardForm from './RewardForm'
-import BlogContract from "../contracts/Blog.json";
-import getWeb3 from "../utils/getWeb3";
 import blogUtils from '../utils/blogUtils';
 
 
@@ -37,7 +35,7 @@ class Submissions extends Component {
     };
 
     fetchSubmissions = async () => {
-        const { accounts, contract, web3 } = this.state;
+        const { contract } = this.state;
         // await contract.methods.set(5).send({ from: accounts[0] });
         //await contract.methods.publishSubmission("content", "title", 0).send({ from: accounts[0], value: web3.utils.toWei("0.05", "ether") });
         //await contract.methods.publishSubmission("second method", "Second", 0,{ from: accounts[0], value: web3.utils.toWei("0.05", "ether") })
@@ -49,7 +47,7 @@ class Submissions extends Component {
             .then(res => {
                 this.setState({ submissionsCount: res });
             }).then(async () => {
-                if (this.state.submissionsCount != 0) {
+                if (this.state.submissionsCount !== 0) {
                     await contract.methods
                         .getAllSubmissions()
                         .call()
