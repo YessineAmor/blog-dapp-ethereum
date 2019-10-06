@@ -10,7 +10,7 @@ contract("Blog", accounts => {
   });
 
   it("should publish submission", async () => {
-    await blogInstance.publishSubmission("content", "title", 0, { from: accounts[0], value: web3.utils.toWei("0.001", "ether") });
+    await blogInstance.publishSubmission("content", "title", 0, { from: accounts[0], value: web3.utils.toWei("0.05", "ether") });
     assert.equal(await blogInstance.getSubmissionsLength(), 1, "Submission wasn't published");
   });
 
