@@ -1,5 +1,9 @@
 # blog-dapp-ethereum
-A blog dApp on Ethereum blockchain using truffle, solidity and react
+A blog dApp on Ethereum blockchain using truffle, solidity and react.
+
+Deployed here: https://blog-dapp.herokuapp.com/  
+
+![](https://i.ibb.co/HPjL42y/greatest-blog.png)
 
 ## User capabilites
 * Users can publish articles - DONE
