@@ -9,9 +9,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "package.json" }}
+          - v3-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - v3-dependencies-
       - run:
           name: Installing client dependencies
           command: cd client/ && yarn
@@ -20,15 +20,14 @@ jobs:
           command: cd client/ && yarn run test
       - run:
           name: Building client
-          command: cd client/ && yarn run build
+          command: cd client/ && CI=false yarn run build
       - run:
           name: Installing dependencies
           command: npm install
       - save_cache:
           paths:
-            - node_modules
             - client/node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v3-dependencies-{{ checksum "package.json" }}
       - run:
           name: Running truffle tests
           command: npm run test
