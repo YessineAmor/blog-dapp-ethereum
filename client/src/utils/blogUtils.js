@@ -28,6 +28,9 @@ const blogUtils = class {
             // Get network provider and this.web3 this.instance.
             if (this.web3 == null) {
                 this.web3 = await getWeb3();
+                this.web3.eth.net.getId().then(() => {
+                    
+                }).catch(e => { console.log("error!!", e) })
                 // Use this.web3 to get the user's this.accounts.
                 this.accounts = await this.web3.eth.getAccounts();
                 // Get the contract this.instance.

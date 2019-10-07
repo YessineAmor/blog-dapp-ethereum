@@ -11,12 +11,13 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { tab: "Home" };
+        this.state = { tab: "Home", web3: null };
 
     }
 
     componentDidMount = async () => {
         document.title = "Greatest Blog!";
+        this.setState({ web3: blogUtils.web3 });
     }
 
     buttonClicked = (event) => {
@@ -34,28 +35,36 @@ class App extends Component {
     }
 
     render() {
-        /*  if (!this.state.web3) {
-             return <div> Loading Web3, accounts, and contract... </div>;
-         } */
+
         const header = <div> <h1>Greatest Blog Ever</h1>
             <h5>it's not the greatest looking blog but the more important question
         to ask does it have the best content? ... well no but it's something!</h5>
             <h6>Runs on Ropsten network.</h6>
             <Navbar buttonClicked={this.buttonClicked} /></div>
-        if (this.state.tab == "Home") {
+        if (!this.state.web3) {
             return (
                 <div className="App">
                     {header}
-                    <Submissions />
+                    <br></br>
+                    <div> Please verify that you have metamask installed and activated </div>;
                 </div>
-            );
-        } else if (this.state.tab == "Write") {
-            return (
-                <div className="App">
-                    {header}
-                    <PublishForm />
-                </div>
-            );
+            )
+        } else {
+            if (this.state.tab == "Home") {
+                return (
+                    <div className="App">
+                        {header}
+                        <Submissions />
+                    </div>
+                );
+            } else if (this.state.tab == "Write") {
+                return (
+                    <div className="App">
+                        {header}
+                        <PublishForm />
+                    </div>
+                );
+            }
         }
     }
 }
