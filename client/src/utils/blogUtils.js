@@ -4,38 +4,40 @@ import BlogContract from "../contracts/Blog.json";
 const blogUtils = class {
 
     constructor() {
-        this.web3=null;
-        this.accounts=null;
-        this.networkId=null;
-        this.instance=null;
+        this.web3 = null;
+        this.accounts = null;
+        this.networkId = null;
+        this.instance = null;
     }
 
-    get accounts(){
+    get accounts() {
         return this.accounts;
     }
-    get instance(){
+    get instance() {
         return this.instance;
     }
-    get networkId(){
+    get networkId() {
         return this.instance;
     }
-    get web3(){
+    get web3() {
         return this.instance;
     }
 
     static async getVars() {
         try {
             // Get network provider and this.web3 this.instance.
-            this.web3 = await getWeb3();
-            // Use this.web3 to get the user's this.accounts.
-            this.accounts = await this.web3.eth.getAccounts();
+            if (this.web3 == null) {
+                this.web3 = await getWeb3();
+                // Use this.web3 to get the user's this.accounts.
+                this.accounts = await this.web3.eth.getAccounts();
+                // Get the contract this.instance.
+                this.networkId = await this.web3.eth.net.getId();
+                this.instance = new this.web3.eth.Contract(
+                    BlogContract.abi,
+                    '0x55DAeE5db3BCB9b74ddf0fF483322519fcf376b9'
+                );
+            }
 
-            // Get the contract this.instance.
-             this.networkId = await this.web3.eth.net.getId();
-             this.instance = new this.web3.eth.Contract(
-                BlogContract.abi,
-                '0x55DAeE5db3BCB9b74ddf0fF483322519fcf376b9'
-            );
             return [this.web3, this.accounts, this.networkId, this.instance]
         } catch (error) {
             console.log(error)
