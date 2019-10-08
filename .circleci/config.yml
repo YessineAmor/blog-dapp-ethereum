@@ -32,6 +32,7 @@ jobs:
     docker:
       - image: circleci/node:10.16.3
     steps:
+      - checkout
       - run:
           name: Running react tests
           command: pwd && ls && cd client/ && SKIP_PREFLIGHT_CHECK=true yarn run test
