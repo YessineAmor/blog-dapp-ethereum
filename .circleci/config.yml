@@ -35,7 +35,7 @@ jobs:
       - checkout
       - run:
           name: Running react tests
-          command: pwd && ls && cd client/ && SKIP_PREFLIGHT_CHECK=true yarn run test
+          command: yarn add react-scripts && SKIP_PREFLIGHT_CHECK=true yarn run test
       - run:
           name: Running truffle tests
           command: yarn run test
