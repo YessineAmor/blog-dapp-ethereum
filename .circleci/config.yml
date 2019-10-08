@@ -31,11 +31,11 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.16.3
-    #working-directory: ~/blog-dapp-ethereum
+    working-directory: ~/blog-dapp-ethereum
     steps:
       - run:
           name: Running react tests
-          command: cd client/ && SKIP_PREFLIGHT_CHECK=true yarn run test
+          command: pwd && ls && cd client/ && SKIP_PREFLIGHT_CHECK=true yarn run test
       - run:
           name: Running truffle tests
           command: yarn run test
