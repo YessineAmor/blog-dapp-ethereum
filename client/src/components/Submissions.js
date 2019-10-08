@@ -7,11 +7,6 @@ import blogUtils from '../utils/blogUtils';
 class Submissions extends Component {
     state = { submissionsCount: 0, web3: null, accounts: null, contract: null, submissions: [] };
 
-    constructor(props) {
-        super(props);
-
-    }
-
     componentDidMount = async () => {
         try {
             // Set web3, accounts, and contract to the state, and then proceed with an

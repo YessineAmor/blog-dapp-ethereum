@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import getWeb3 from "./utils/getWeb3"
 
 import "./App.css";
 import Submissions from "./components/Submissions.js";
@@ -43,14 +42,14 @@ class App extends Component {
             <Navbar buttonClicked={this.buttonClicked} /></div>
         console.log("app.js ",this.state.web3)
 
-        if (this.state.tab == "Home") {
+        if (this.state.tab === "Home") {
             return (
                 <div className="App">
                     {header}
                     <Submissions />
                 </div>
             );
-        } else if (this.state.tab == "Write") {
+        } else if (this.state.tab === "Write") {
             return (
                 <div className="App">
                     {header}
@@ -58,7 +57,7 @@ class App extends Component {
                 </div>
             );
         }
-        else if (this.state.tab == "Rewards") {
+        else if (this.state.tab === "Rewards") {
             return (
                 <div className="App">
                     {header}

@@ -1,17 +1,7 @@
 import React, { Component } from 'react'
-import blogUtils from '../utils/blogUtils';
-import Submissions from './Submissions';
-import PublishForm from './PublishForm';
 
 class Navbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { tab: "Home" };
-    }
-
-
     render() {
-
         return (
             <div className="topNav">
                 <button name="Home" onClick={this.props.buttonClicked} className="active">Home</button>
@@ -21,6 +11,5 @@ class Navbar extends Component {
         );
     }
 }
-
 
 export default Navbar;
