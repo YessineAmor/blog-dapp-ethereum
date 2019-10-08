@@ -31,7 +31,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:10.16.3
-    working-directory: ~/blog-dapp-ethereum
     steps:
       - run:
           name: Running react tests
