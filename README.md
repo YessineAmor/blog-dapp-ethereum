@@ -5,8 +5,6 @@ A blog dApp on Ethereum blockchain using truffle, solidity and react.
 
 Deployed here: https://blog-dapp.herokuapp.com/  
 
-![](https://i.ibb.co/HPjL42y/greatest-blog.png)
-
 ## User capabilites
 * Users can publish articles - DONE
 * Users can comment on articles - TO DO
