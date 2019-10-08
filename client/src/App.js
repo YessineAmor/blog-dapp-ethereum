@@ -5,6 +5,7 @@ import Submissions from "./components/Submissions.js";
 import PublishForm from "./components/PublishForm.js";
 import Navbar from "./components/Navbar";
 import blogUtils from "./utils/blogUtils";
+import MyRewards from "./components/MyRewards";
 
 class App extends Component {
 
@@ -15,12 +16,25 @@ class App extends Component {
     }
 
     componentDidMount = async () => {
-        document.title = "Greatest Blog!";
         this.setState({ web3: blogUtils.web3 });
     }
 
     buttonClicked = (event) => {
         switch (event.target.name) {
+            case "Home":
+                this.setState({ tab: "Home" });
+                break;
+            case "Write":
+                this.setState({ tab: "Write" });
+                break;
+            case "Rewards":
+                this.setState({ tab: "Rewards" });
+                break;
+        }
+    }
+
+    changeTab = (newTab) => {
+        switch (newTab) {
             case "Home":
                 this.setState({ tab: "Home" });
                 break;
@@ -40,7 +54,6 @@ class App extends Component {
         to ask does it have the best content? ... well no but it's something!</h5>
             <h6>Runs on Ropsten network.</h6>
             <Navbar buttonClicked={this.buttonClicked} /></div>
-        console.log("app.js ",this.state.web3)
 
         if (this.state.tab === "Home") {
             return (
@@ -53,7 +66,7 @@ class App extends Component {
             return (
                 <div className="App">
                     {header}
-                    <PublishForm />
+                    <PublishForm changeTab={this.changeTab} />
                 </div>
             );
         }
@@ -61,7 +74,7 @@ class App extends Component {
             return (
                 <div className="App">
                     {header}
-                    <p>Coming soon..</p>
+                    <MyRewards />
                 </div>
             );
         }

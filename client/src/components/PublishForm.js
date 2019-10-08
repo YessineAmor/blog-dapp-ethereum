@@ -11,7 +11,13 @@ class PublishForm extends Component {
             event.preventDefault();
             const title = this.state.title
             const content = this.state.content
-            blogUtils.publishSubmission(title, content, 0)
+            if (title.length > 40 || content.length > 300) {
+                alert("Title maximum length is 40 chars\nContent max length is 300 chars")
+            } else {
+                await blogUtils.publishSubmission(title, content, 0)
+                this.props.changeTab("Home")
+            }
+
         } catch (error) {
             console.log(error)
         }
@@ -22,6 +28,9 @@ class PublishForm extends Component {
     render() {
         if (!blogUtils.accounts) {
             return <div> Couldn't detect account. Please verify that you have metamask installed and running </div>
+        }
+        if (blogUtils.networkId != 3) {
+            return <p>Please connect to the ropsten network.</p>
         }
         return (
             <div>

@@ -27,7 +27,6 @@ class Submissions extends Component {
                 })
             }
         } catch (error) {
-            console.log("id", await this.state.web3.eth.net.getId())
             // Catch any errors for any of the above operations.
             alert(
                 `Failed to load web3, accounts, or contract. Check console for details.`
@@ -56,16 +55,15 @@ class Submissions extends Component {
                     this.setState({ submissions: submissions });
                 }
             });
-        console.log(this.state.submissions);
-        // Update state with the result.
     };
 
     render() {
         if (!this.state.accounts) {
-            return <div> Couldn't detect account. Please verify that you have metamask installed and running </div>
+            return <p> Couldn't detect account. Please verify that you have metamask installed and running </p>
         }
-        console.log("after if")
-
+        if (blogUtils.networkId != 3) {
+            return <p>Please connect to the ropsten network.</p>
+        }
         let Submissions = [];
 
         _.forEachRight(this.state.submissions, (value, index) => {
@@ -78,7 +76,7 @@ class Submissions extends Component {
                         Written by {value[0]}, Rewards:{" "}
                         {this.state.web3.utils.fromWei(value["reward"], "ether")} eth{" "}
                     </pre>{" "}
-                    <h4> {value[2]} </h4>{" "}
+                    <p> {value[2]} </p>{" "}
                     <RewardForm submissionIndex={index} fetchSubmissions={this.fetchSubmissions} />
                 </div>
             );
