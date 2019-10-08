@@ -20,6 +20,9 @@ class PublishForm extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
     render() {
+        if (!blogUtils.accounts) {
+            return <div> Couldn't detect account. Please verify that you have metamask installed and running </div>
+        }
         return (
             <div>
                 <h3>Write something here..</h3>

@@ -7,9 +7,9 @@ import blogUtils from '../utils/blogUtils';
 class Submissions extends Component {
     state = { submissionsCount: 0, web3: null, accounts: null, contract: null, submissions: [] };
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        
+
     }
 
     componentDidMount = async () => {
@@ -20,16 +20,19 @@ class Submissions extends Component {
             const web3 = blogUtils.web3;
             const accounts = blogUtils.accounts;
             const instance = blogUtils.instance;
-            this.setState(
-                { web3, accounts, contract: instance },
-                this.fetchSubmissions
-            );
-            // await instance.methods.publishSubmission("content", "title", 0).send({ from: accounts[0], value: web3.utils.toWei("0.05", "ether") });
-            this.state.contract.events.SubmissionEvent({}, (err, event) => {
-                console.log("EVENT!! Added new submission with ID ", event.returnValues.submissionID)
-                this.fetchSubmissions()
-            })
+            if (accounts) {
+                this.setState(
+                    { web3, accounts, contract: instance },
+                    this.fetchSubmissions
+                );
+                // await instance.methods.publishSubmission("content", "title", 0).send({ from: accounts[0], value: web3.utils.toWei("0.05", "ether") });
+                this.state.contract.events.SubmissionEvent({}, (err, event) => {
+                    console.log("EVENT!! Added new submission with ID ", event.returnValues.submissionID)
+                    this.fetchSubmissions()
+                })
+            }
         } catch (error) {
+            console.log("id", await this.state.web3.eth.net.getId())
             // Catch any errors for any of the above operations.
             alert(
                 `Failed to load web3, accounts, or contract. Check console for details.`
@@ -39,6 +42,7 @@ class Submissions extends Component {
     };
 
     fetchSubmissions = async () => {
+
         const contract = this.state.contract;
         let submissions = [];
         await contract.methods
@@ -62,6 +66,11 @@ class Submissions extends Component {
     };
 
     render() {
+        if (!this.state.accounts) {
+            return <div> Couldn't detect account. Please verify that you have metamask installed and running </div>
+        }
+        console.log("after if")
+
         let Submissions = [];
 
         _.forEachRight(this.state.submissions, (value, index) => {

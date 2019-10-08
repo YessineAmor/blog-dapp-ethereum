@@ -41,30 +41,30 @@ class App extends Component {
         to ask does it have the best content? ... well no but it's something!</h5>
             <h6>Runs on Ropsten network.</h6>
             <Navbar buttonClicked={this.buttonClicked} /></div>
-        if (!this.state.web3) {
+        console.log("app.js ",this.state.web3)
+
+        if (this.state.tab == "Home") {
             return (
                 <div className="App">
                     {header}
-                    <br></br>
-                    <div> Please verify that you have metamask installed and activated </div>;
+                    <Submissions />
                 </div>
-            )
-        } else {
-            if (this.state.tab == "Home") {
-                return (
-                    <div className="App">
-                        {header}
-                        <Submissions />
-                    </div>
-                );
-            } else if (this.state.tab == "Write") {
-                return (
-                    <div className="App">
-                        {header}
-                        <PublishForm />
-                    </div>
-                );
-            }
+            );
+        } else if (this.state.tab == "Write") {
+            return (
+                <div className="App">
+                    {header}
+                    <PublishForm />
+                </div>
+            );
+        }
+        else if (this.state.tab == "Rewards") {
+            return (
+                <div className="App">
+                    {header}
+                    <p>Coming soon..</p>
+                </div>
+            );
         }
     }
 }
